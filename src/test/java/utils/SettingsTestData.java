@@ -6,6 +6,7 @@ import aquality.selenium.core.utilities.JsonSettingsFile;
 import com.google.gson.Gson;
 import models.*;
 import lombok.experimental.UtilityClass;
+import pages.AccuweatherPage;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -15,9 +16,9 @@ public class SettingsTestData {
     public final String RESOURCES_PATH = "src/test/resources/";
     public final String TEST_DATA_PATH = RESOURCES_PATH + "testdata/";
     private final String ENVIRONMENT_PATH = RESOURCES_PATH + "environment/";
-    private final String USER_FILE_PATH = TEST_DATA_PATH + "userData.json";
-    private final String DATA_TABLE_FILE_PATH = TEST_DATA_PATH + "dataTableData.json";
-    private final String FILE_DATA_PATH = TEST_DATA_PATH + "fileData.json";
+    private final String UI_USER_FILE_PATH = TEST_DATA_PATH + "uiData.json";
+    private final String UI_PASSWORD_PATH = TEST_DATA_PATH + "uiPasswordData.json";
+    private final String ACCUWEATHER_DATA_PATH = TEST_DATA_PATH + "weatherData.json";
     private final ISettingsFile ENVIRONMENT_CONFIG = new JsonSettingsFile("env.json");
     private final Gson GSON = new Gson();
 
@@ -26,17 +27,11 @@ public class SettingsTestData {
         return deserializeJson(envConfigPath, EnvData.class);
     }
 
-    public UserData getUserData() {
-        return deserializeJson(USER_FILE_PATH, UserData.class);
-    }
+    public AccuweatherData getAccuweatherData() { return deserializeJson(ACCUWEATHER_DATA_PATH, AccuweatherData.class); }
 
-    public DataTableData getDataTableData() {
-        return deserializeJson(DATA_TABLE_FILE_PATH, DataTableData.class);
-    }
+    public UIData getUIUserData() { return deserializeJson(UI_USER_FILE_PATH, UIData.class); }
 
-    public FileData getFileData() {
-        return deserializeJson(FILE_DATA_PATH, FileData.class);
-    }
+    public UIPasswordData getUIPassword() { return deserializeJson(UI_PASSWORD_PATH, UIPasswordData.class); }
 
     private String getCurrentEnvironment() {
         return ENVIRONMENT_CONFIG.getValue("/env").toString();
