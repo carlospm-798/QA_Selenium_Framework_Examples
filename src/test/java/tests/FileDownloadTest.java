@@ -7,7 +7,7 @@ import utils.FileUtils;
 import utils.SettingsTestData;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-
+import static io.qameta.allure.Allure.step;
 import java.io.File;
 
 public class FileDownloadTest extends BaseTest {
@@ -18,8 +18,10 @@ public class FileDownloadTest extends BaseTest {
 
     @Test
     public void fileDownloadTest() {
+        step("Clicking file download");
         mainPage.clickNavigationLink(MainPageNavigation.FILE_DOWNLOAD);
         Assert.assertTrue(fileDownloadPage.isFileDownloadLinkDisplayed(fileName), "File is not displayed");
+        step("Clicking the download file option");
         fileDownloadPage.clickFileDownloadLink(fileName);
         Assert.assertTrue(FileUtils.isFileExist(downloadedFile),
                 "File is not downloaded");
@@ -27,6 +29,7 @@ public class FileDownloadTest extends BaseTest {
 
     @AfterMethod
     public void deleteFile() {
+        step("Deleting the file");
         FileUtils.deleteFileIfExist(downloadedFile);
     }
 }

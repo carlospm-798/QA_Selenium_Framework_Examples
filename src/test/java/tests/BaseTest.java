@@ -6,8 +6,7 @@ import pages.MainPage;
 import utils.SettingsTestData;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-
-import static aquality.selenium.browser.AqualityServices.getBrowser;
+import static io.qameta.allure.Allure.step;
 
 public abstract class BaseTest {
     protected final MainPage mainPage = new MainPage();
@@ -15,13 +14,17 @@ public abstract class BaseTest {
 
     @BeforeMethod
     public void setup() {
+        step("Open the browser");
         browser = AqualityServices.getBrowser();
+        step("Maximize the browser window");
         browser.maximize();
+        step("Go to start URL");
         browser.goTo(SettingsTestData.getEnvData().getHost());
     }
 
     @AfterMethod
     public void teardown() {
+        step("Quiting the browser");
         browser.quit();
     }
 }
