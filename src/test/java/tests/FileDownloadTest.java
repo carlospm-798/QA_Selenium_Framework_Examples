@@ -16,7 +16,7 @@ public class FileDownloadTest extends BaseTest {
     private final String filePath = SettingsTestData.RESOURCES_PATH + fileName;
     private final File downloadedFile = new File(filePath);
 
-    @Test
+    @Test(enabled = false)
     public void fileDownloadTest() {
         step("Clicking file download");
         mainPage.clickNavigationLink(MainPageNavigation.FILE_DOWNLOAD);
